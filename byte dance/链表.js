@@ -86,6 +86,26 @@ function LinkedList() {
             return -1;
         };
 
+        LinkedList.prototype.InremoveAt = function(position){
+            var current = this.head;
+            var previoous;
+            if(position === 1){
+                while(current.next){
+                    previoous = current;
+                    current = current.next;
+                }
+                previoous.next = null;
+                this.length--;
+                return current.element;
+            } else if(position === this.length){
+                this.head = current.next;
+                return current.element;
+            } else {
+                position = this.length+1-position;
+                return this.removeAt(position);
+            }
+        };
+
         LinkedList.prototype.isEmpty = function(){
             return this.length === 0;
         };
@@ -119,3 +139,4 @@ linkedList.insert(1, 'the ');
 console.log(linkedList.toString());
 console.log(linkedList.removeAt(1));
 console.log(linkedList.indexOf('Hello '));
+console.log(linkedList.InremoveAt(2));
