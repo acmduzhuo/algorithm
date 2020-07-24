@@ -48,6 +48,64 @@ class Tree {
            return arr;
        }
    }
+
+   inOrderTraverse(curNode = this.root){
+       if(!curNode){
+           return ;
+       }
+       var arr = [];
+       const inOrderTraverseNode = (node) => {
+           if(!node){
+               return
+           }
+           inOrderTraverseNode(node.left);
+           arr.push(node.key);
+           inOrderTraverseNode(node.right);
+       };
+       inOrderTraverseNode(curNode);
+       return arr;
+   }
+
+    postOrderTraverse(curNode = this.root){
+       if(!curNode){
+           return ;
+       }
+       var arr = [];
+       const postOrderTraverseNode = (node) => {
+           if(!node){
+               return ;
+           }
+           postOrderTraverseNode(node.left);
+           postOrderTraverseNode(node.right);
+           arr.push(node.key);
+       };
+       postOrderTraverseNode(curNode);
+       return arr;
+    }
+
+    minNode(node = this.root){
+       if(!node.left){
+           return node.key;
+       }
+       return this.minNode(node.left);
+    }
+
+    maxNode(node = this.root){
+       if(!node.right){
+           return node.key;
+       }
+       return this.maxNode(node.right);
+    }
+
+    search(key, curNode = this.root){
+       if(! curNode){
+           return false;
+       }
+       if(key === curNode.key){
+           return true;
+       }
+       return this.search(key, key<curNode.key?curNode.left:curNode.right);
+    }
 }
 const tree = new Tree(new Node(11));
 tree.insert(new Node(15));
@@ -63,4 +121,9 @@ tree.insert(new Node(14));
 tree.insert(new Node(20));
 tree.insert(new Node(18));
 tree.insert(new Node(25));
-console.log(tree.preOrderTraverse());
+console.log(tree.preOrderTraverse());//先序遍历
+console.log(tree.inOrderTraverse());//中序遍历
+console.log(tree.postOrderTraverse());//后序遍历
+console.log(tree.minNode());//找最小值
+console.log(tree.maxNode());//找最大值
+console.log((tree.search(123)));
