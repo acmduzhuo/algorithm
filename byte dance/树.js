@@ -1,60 +1,66 @@
-function Tree() {
-    function Node(element) {
-        this.element = element;
-        this.next = null;
-    }
-    this.root = null;
-    Tree.prototype.insert = function(key){
-        var newNode = new Node(key);
-
-        if(this.root === null){
-            this.root = newNode;
-        } else {
-            this.insertNode(this.root, newNode);
-        }
-    };
-
-    Tree.prototype.insertNode = function (node, newNode) {
-        if (newNode.element < node.element) {
-            if (node.prev === null) {
-                node.prev = newNode;
-            } else {
-                this.insertNode(node.prev, newNode);
-            }
-        } else {
-            if (node.next === null) {
-                node.next = newNode;
-            } else {
-                this.insertNode(node.next, newNode);
-            }
-        }
-    };
-
-    Tree.prototype.preOrderTraverseNode = function (node, callback) {
-        if (node !== null) {
-            callback(node.element);
-            this.preOrderTraverseNode(node.prev, callback);
-            this.preOrderTraverseNode(node.next, callback);
-        }
-    };
-    Tree.prototype.preOrderTraverse =  function(callback) {
-        this.preOrderTraverseNode(this.root, callback);
+class Node{
+    constructor(key, left=null, right=null) {
+        this.key = key;
+        this.left = left;
+        this.right = right;
     }
 }
-let tree = new Tree();
-tree.insert(11);
-tree.insert(7);
-tree.insert(15);
-tree.insert(5);
-tree.insert(9);
-tree.insert(13);
-tree.insert(20);
-tree.insert(3);
-tree.insert(6);
-tree.insert(8);
-tree.insert(10);
-tree.insert(12);
-tree.insert(14);
-tree.insert(18);
-tree.insert(25);
-tree.preOrderTraverse((value) => console.log(value));
+
+class Tree {
+   constructor(node) {
+       this.root = node;
+   }
+
+   insert(newNode, node = this.root){
+       if(!this.root){
+           this.root = newNode;
+       } else {
+           if(newNode.key < node.key){
+               if (node.left === null){
+                   node.left = newNode;
+               } else {
+                   this.insert(newNode, node.left);
+               }
+           } else {
+               if(node.right === null){
+                   node.right = newNode;
+               } else {
+                   this.insert(newNode, node.right);
+               }
+           }
+       }
+   }
+
+   preOrderTraverse(curNode = this.root){
+       var arr = [];
+       if(!curNode){
+           return ;
+       } else {
+           const preOrderTraverseNode = (node) => {
+               if(!node){
+                   return ;
+               }
+               arr.push(node.key);
+               preOrderTraverseNode(node.left);
+               preOrderTraverseNode(node.right);
+           };
+           preOrderTraverseNode(curNode);
+           return arr;
+       }
+   }
+}
+const tree = new Tree(new Node(11));
+tree.insert(new Node(15));
+tree.insert(new Node(7));
+tree.insert(new Node(5));
+tree.insert(new Node(3));
+tree.insert(new Node(9));
+tree.insert(new Node(8));
+tree.insert(new Node(10));
+tree.insert(new Node(13));
+tree.insert(new Node(12));
+tree.insert(new Node(14));
+tree.insert(new Node(20));
+tree.insert(new Node(18));
+tree.insert(new Node(25));
+console.log(tree.preOrderTraverse());
