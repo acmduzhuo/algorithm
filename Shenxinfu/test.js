@@ -62,8 +62,8 @@ for(var i=0;i<str.length;i++){
 }
 // console.log(arr);
 var x = 0, y = 0;
-for(var i=0;i<arr.length;i++){
-    for(var j=0;j<arr[0].length;j++){
-        if()
-    }
-}
+// for(var i=0;i<arr.length;i++){
+//     for(var j=0;j<arr[0].length;j++){
+//         if()
+//     }
+// }
