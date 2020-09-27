@@ -66,21 +66,21 @@
 // }
 // console.log(foo([2, -1, 3, -5, 4, -2, 3]));
 
-// obj = {
-//     name :'aaa',
-//     fn : function () {
-//         console.log(this.name);
-//         var f2 = function () {
-//             console.log(this.name);
-//         };
-//         f2();
-//     }
-// };
-// obj.fn();
-var flag = true;
-var a = 2;
-while(flag){
-    console.log(2);
-}
-a = 3;
-setTimeout(function(){ flag = false;}, 2000);
+obj = {
+    name :'aaa',
+    fn : function () {
+        console.log(this.name);
+        var f2 = function () {
+            console.log(this.name);
+        };
+        f2();
+    }
+};
+obj.fn();
+// var flag = true;
+// var a = 2;
+// while(flag){
+//     console.log(2);
+// }
+// a = 3;
+// setTimeout(function(){ flag = false;}, 2000);
